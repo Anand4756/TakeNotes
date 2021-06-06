@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.logo{
+    height: 120px;
+
+}
+.logo h1{
+    font-size: 100px;
+    text-align: center;
+}
+
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background-color: #272626;
+    opacity: 0.8;
+    padding:  0 30px;
+    width: 100%;
+    height: 58px;
+    z-index: 1;
+    border-bottom: solid 10px rgb(192, 65, 230);
+    
+    margin-bottom: 0px;
+}
+
+
+
+.navbar ul{
+display: flex;
+margin-top: 10px;
+overflow: hidden;
+list-style: none;
+}
+
+li{
+padding: 15px 10px;
+float: left;
+margin: 0 10px;
+text-decoration: none;
+font-weight: 800;
+font-family:  'Balsamiq Sans', cursive;
+font-size: 15px;
+}
+
+a{
+color: white;
+text-decoration: none;
+padding: 15px 20px;
+
+}
+.navbar li:hover{
+background-color: rgb(192, 65, 230);
+transition-delay: 2s;
+transition: ease-in;
+transition: all 0.3s ease;
+border-radius: 15px;
+opacity: 0.9;
+}
+
+.navbar li a:hover{
+    text-decoration: none;
+    color: white;
+
+    
+    
+}
+
+.main{
+    width: 80%;
+    margin: 20px auto; 
+    
+    display: grid;
+    margin-left: 10%;
+    grid-template-rows: 300px 300px 300px 300px 300px;
+    grid-template-columns: repeat(4, 1fr) 200px;
+    grid-gap: 20px;
+    
+    
+}
+.slider{
+  
+grid-column: 1/4;
+grid-row: 1/2;
+grid-row-gap: 20px;
+border: solid 3px rgb(192, 65, 230);
+background-color: red;
+border-radius: 7px;
+}
+
+.upload{
+
+    background-image: url('../images/question.jpg');
+    background-repeat:no-repeat;
+    background-size:100%;
+    background-position-y: -14px;
+    
+    border: solid 3px rgb(192, 65, 230);
+    grid-column: 4/-1;
+    border-radius: 12px;
+    
+}
+.upload:hover{
+    
+    
+    transform: scale(1.02);
+}
+
+.popular-uploads{
+    background-color: aqua;
+    grid-column: 4/-1;
+    border: solid 3px rgb(192, 65, 230);
+    border-radius: 12px;
+   
+}
+.carousel-inner > .item > img { width:100%; height:295px;}
+div.posts{
+    background-color:crimson;
+    grid-column: 1/4;
+    grid-row:2/2;
+    
+  
+    border: solid 3px rgb(192, 65, 230);
+    border-radius: 12px;
+  
+}
+#parent{
+   
+   max-width:867px;
+    height: 550px;
+    top:10px;
+    bottom:10px;
+    
+}
+#child{
+    
+    
+    bottom:0px;
+    right:0px;
+    left:0px;
+    overflow-y:scroll;
+    max-height:47%;
+    
+    
+}
+
+.question{
+    
+    background-color: black;
+    grid-column: 1/-1;
+}
+#books{
+    background: black;
+    text-align: center;
+    padding: 20px
+}
+.books{
+    
+    opacity: 0.9;
+    padding: 10px;
+    height: 20vh;
+    display: flex;
+}
+.maths{
+    background: chocolate;
+    width: 33.3%;
+    margin: 4px;
+    padding: 10px;
+    height: auto;
+    
+}
+.physics{
+    background: chocolate;
+    width: 33.3%;
+    margin: 4px;
+    padding: 10px;
+    height: auto;
+}
+
+.chemistry{
+    background: chocolate;
+   width: 33.3%;
+    margin: 4px;
+    padding: 10px;
+    height: auto;
+}
+.mechanics{
+    background: chocolate;
+    width: 33.3%;
+    margin: 4px;
+    padding: 10px;
+    height: auto;
+}
+
+input{
+    padding: 4px;
+    margin: 2px;
+    border-radius: 20px;
+    background: whitesmoke;
+}
+
+ #books input:hover{
+    background-color: chocolate;
+    cursor: pointer;
+}

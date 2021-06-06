@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        input{
+        padding: 4px;
+        margin: 2px;
+    }
+
+#course{
+    
+  margin-top: 40px;
+   padding: 10px;
+  
+}
+.cse{
+   background-color:  rgb(192, 65, 230);
+    padding-top: 20px;
+    padding-left: 20px;
+    margin: auto 40px;
+    text-align:left;
+    
+  
+    }
+.cse a{
+   padding: 10px;
+   margin: 10px auto;
+   
+}
+.cse input:hover{
+    background: chocolate;
+  
+}
+
+</style>
+</head>
+<body style="background-color:rgb(199, 224, 141)">
+
+
+    <a href="/create-notice"><button style="font-size: 30px; width: 10%; margin-left: 30%;">NOTICE</button></a>
+
+    <section id="course" class="course">
+        
+        <% if(notesdata.length>0) { %>
+            <% notesdata.forEach(function(notess){ %>
+            <div class="cse">
+              
+                    
+           <a href="/delete/<%=notess.id %>"  <i class="fas fa-trash-alt" style="float: right; margin-right: 30px; font-size: 30px;"></i></a>
+                    <h2>SUBJECT: <span style="margin-left: 15px; color:maroon;"> <%= notess.notessubject %></h2> </span>
+                    <h2>TOPIC: <span style="margin-left: 15px; color:maroon;">   <%= notess.notestopic %></h2></span>
+                    <h2>TYPE: <span style="margin-left: 15px; color:maroon;">   <%= notess.notestype %></h2></span>
+                    
+               
+                   <a href="./uploads/<%= notess.notesfile %>" download><button type="submit" class="sendbtn" 
+                    style="font-size: 25px; font-family: Verdana, Geneva, Tahoma, sans-serif; 
+                    background-color: chocolate; border-radius: 20px; margin-left: 3px; float: right;" >DOWNLOAD</button></a>
+              
+                </div>
+                <% })}else{ %>
+                    <h2>Nothing found</h2>
+               <% } %>
+                
+               
+             
+         
+            </section>
+ 
+</body>
+</html>

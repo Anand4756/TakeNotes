@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUESTION PAPERS</title>
+    <style>
+        
+      *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      input{
+      padding: 4px;
+      margin: 2px;
+  }
+
+#course{
+  
+
+ padding: 10px;
+
+}
+.cse{
+ background-color:  rgb(192, 65, 230);
+  padding-top: 20px;
+  padding-left: 20px;
+  margin: 20px 90px;
+  height: 70px;
+  }
+
+.cse a{
+ padding: 10px;
+ margin: 10px;
+ 
+}
+.cse input:hover{
+  background: chocolate;
+
+}
+.heading{
+ background-color:  rgb(160, 123, 172);
+  padding: 10px 20px;
+  padding-left: 20px;
+  margin: 20px 90px;
+  color: rgb(239, 241, 72);
+}
+.logo{
+    height: 120px;
+
+}
+.logo h1{
+    font-size: 100px;
+    text-align: center;
+}
+
+</style>
+</head>
+<body>
+   <h2 style="text-align: center;">QUESTION PAPER</h2>
+
+   <section id="course" class="course">
+    <div class="heading">
+      <table>
+        
+        <tr>
+      
+        <td><h2 style="padding: auto 60px; margin: auto 77px; width: 81px;">SUBJECT</h2></td>
+        <td><h2 style="padding: auto 60px; margin: auto 80px; width: 125px;">TOPIC</h2></td>
+        
+      
+       </tr> 
+       </table>
+      </div>
+
+        <% notesdata.forEach(function(notess){ %>
+            <% if(notess.notestype!="notes" && notess.course=="bba") { %>
+              <div class="cse">
+        
+                <table>
+                <tr>
+     
+          <td>  <h2  style=" margin: auto 80px; margin-top: -18px; width: 50px;"><%= notess.notessubject %></h2></td>
+           <td> <h2 style="padding: auto 60px; margin: auto 80px;margin-top: -18px; width: 250px;"><%= notess.notestopic %></h2></td>
+           
+       
+           <a href="../uploads/<%= notess.notesfile%>" download><button type="submit" class="sendbtn" 
+            style="font-size: 25px; font-family: Verdana, Geneva, Tahoma, sans-serif; 
+            background-color: chocolate; border-radius: 20px; margin-left: 3px; margin-right: 80px; float: right;" >DOWNLOAD</button></a>
+      </tr> 
+    </table>
+ 
+        </div>
+        <% } %>
+        <% }) %>
+        
+      </div> 
+
+
+</body>
+</html>
