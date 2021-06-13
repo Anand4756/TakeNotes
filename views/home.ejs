@@ -26,8 +26,6 @@
 }
 
 #course{
-
-
 padding: 10px;
 
 }
@@ -53,7 +51,7 @@ background: chocolate;
 </style>
 
 </head>
-<body style="background-color:rgb(199, 224, 141);">
+<body style="background-color:rgba(180, 240, 194, 0.774);">
   <!--rgb(242, 243, 160)
    rgb(199, 224, 141)
   -->
@@ -85,8 +83,8 @@ background: chocolate;
 
 
 <form action="" method="POST">
-<input type="text" name="fltrname" placeholder="search subject or topic eg. french" style="width: 40%; text-align: center; margin-left: 30%; margin-top: 20px;">
-<button>SEARCH</button>
+<input type="text" name="fltrname" placeholder="search subject or topic eg. french" style="width: 40%; height: 40px ;text-align: center; margin-left: 30%; margin-top: 20px;">
+<button style="background:rgb(192, 65, 230);height: 40px; border-radius: 20px;width: 100px">SEARCH</button>
 </form>
 
 
@@ -173,17 +171,17 @@ background: chocolate;
 <div class="posts">
   <section id="course" class="course">
     <div class="heading">
-      <h2 style="font-size: 20px; margin: 0px 0px; text-align: center; color: chartreuse;">NOTICE</h2>
+      <h2 style="font-size: 20px; margin-bottom: 10px; text-align: center; color: chartreuse;">NOTICE</h2>
       <div id="parent">
         <div id="child">
           
           <% notice.forEach(function(noticee){ %>
             
-       <div>
+       <div style="margin-top: 22px;">
                      
-               <h2><%= noticee.noticetitle %></h2>
-              <a href="/notice/<%=noticee._id%>"><button>View</button></a>
-         
+               <h2 style="color: white; margin-left:70px;margin-top:-20px"><%= noticee.noticetitle %></h2>
+              <a href="/notice/<%=noticee._id%>"><button style="float: right;margin-top: -38px; margin-right: 40px;color:rgb(192, 65, 230)">View</button></a>
+              
             <% }) %>
                   
                           

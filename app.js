@@ -394,6 +394,52 @@ app.post("/admin-login",function(req, res, next) {
 
         })
 
+        app.get("/notes/btech", function(req, res){
+            Note.find({}.exec,function(err,data){
+             res.render("notes-btech",{notesdata: data});
+                
+            }); 
+        
+        });
+
+        app.get("/notes/bba", function(req, res){
+            Note.find({}.exec,function(err,data){
+             res.render("notes-bba",{notesdata: data});
+                
+            }); 
+        
+        }); 
+         app.get("/notes/bca", function(req, res){
+            Note.find({}.exec,function(err,data){
+             res.render("notes-bca",{notesdata: data});
+                
+            }); 
+        
+        });
+        app.get("/notes/mca", function(req, res){
+            Note.find({}.exec,function(err,data){
+             res.render("notes-mca",{notesdata: data});
+                
+            }); 
+        
+        });
+        app.get("/notes/ba", function(req, res){
+            Note.find({}.exec,function(err,data){
+             res.render("notes-ba",{notesdata: data});
+                
+            }); 
+        
+        });
+
+
+
+
+
+
+
+
+
+
 
 
 
