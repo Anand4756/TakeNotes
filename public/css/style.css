@@ -21,7 +21,7 @@
     justify-content: space-between;
     color: white;
     background-color: #272626;
-    opacity: 0.8;
+    
     padding:  0 30px;
     width: 100%;
     height: 58px;
@@ -61,8 +61,7 @@ background-color: rgb(192, 65, 230);
 transition-delay: 2s;
 transition: ease-in;
 transition: all 0.3s ease;
-border-radius: 15px;
-opacity: 0.9;
+
 }
 
 .navbar li a:hover{
@@ -123,7 +122,7 @@ border-radius: 7px;
 .carousel-inner > .item > img { width:100%; height:295px;}
 div.posts{
     background-color:crimson;
-    grid-column: 1/4;
+    grid-column: 1/-1;
     grid-row:2/2;
     
   
@@ -133,7 +132,7 @@ div.posts{
 }
 #parent{
    
-   max-width:867px;
+   max-width:997px;
     height: 550px;
     top:10px;
     bottom:10px;
@@ -146,7 +145,7 @@ div.posts{
     right:0px;
     left:0px;
     overflow-y:scroll;
-    max-height:37%;
+    max-height:39%;
     
     
 }
@@ -169,7 +168,7 @@ div.posts{
     display: flex;
 }
 .maths{
-    background: chocolate;
+    background: rgb(192, 65, 230);
     width: 33.3%;
     margin: 4px;
     padding: 10px;
@@ -204,9 +203,11 @@ input{
     margin: 2px;
     border-radius: 20px;
     background: whitesmoke;
+
 }
 
  #books input:hover{
-    background-color: chocolate;
+    background-color:  rgb(192, 65, 230);
     cursor: pointer;
+   
 }

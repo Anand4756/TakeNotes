@@ -431,7 +431,10 @@ app.post("/admin-login",function(req, res, next) {
         
         });
 
+app.get("/about-me",function(req, res){
+res.render("about-us");
 
+})
 
 
 
