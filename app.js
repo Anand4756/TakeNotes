@@ -444,11 +444,11 @@ res.render("about-us");
 
 
 
+const port = process.env.PORT || 3000
 
 
 
 
-
-app.listen(3000, function(){
-console.log("Started server at 3000");
+app.listen(port,() => {
+  console.log(`Server running at port `+port);
 });
