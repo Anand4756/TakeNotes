@@ -167,7 +167,7 @@ background: chocolate;
       <h2 style="font-size: 20px; margin-bottom: 10px; text-align: center; color: chartreuse;">NOTICE</h2>
       <div id="parent">
         <div id="child">
-          
+           <% if(notice) { %>
           <% notice.forEach(function(noticee){ %>
             
        <div style="margin-top: 22px;">
@@ -176,7 +176,7 @@ background: chocolate;
               <a href="/notice/<%=noticee._id%>"><button style="float: right;margin-top: -38px; margin-right: 40px;color:rgb(192, 65, 230)">View</button></a>
               
             <% }) %>
-                  
+                  <% } %>
                           
                    </div>       
    

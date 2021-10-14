@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require ("express");
 const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
@@ -25,7 +26,21 @@ app.use(session({
     app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.mg1dh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,{useNewUrlParser: true , useUnifiedTopology: true });
+// mongoose.connect("mongodb://localhost:27017/userDB",{useNewUrlParser: true , useUnifiedTopology: true });
+
+const mongoAtlasUri =
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.mg1dh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+
+try {
+  mongoose.connect(
+    mongoAtlasUri,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log(" Mongoose is connected")
+  );
+} catch (e) {
+  console.log("could not connect");
+}
+
 mongoose.set("useCreateIndex",true);
 
 
@@ -51,6 +66,7 @@ const userSchema = new mongoose.Schema({
         
         });
         
+        // user.save();
     passport.use(User.createStrategy());
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
@@ -81,11 +97,18 @@ const userSchema = new mongoose.Schema({
     };
     
     const Admin = mongoose.model("Admin", adminSchema);
+        // const newnotice = new Admin({
+        //     noticetitle: "Be a part of this free for everyone Notes helper",
+        //     noticebody: "This website is created to help everyone who want to learn for free. This website is totally based on your contribution so if you have notes then pls share with everyone"
+        // })
+        // newnotice.save();
+
+
     var findadmin = Admin.find();
 
-
-app.get("/",function(req, res){
-    User.find({}.exec,function(err,data){
+    
+app.get("/",async function(req, res){
+    await User.find({}.exec,function(err,data){
         Admin.find({},function(err, dataa){
             
        res.render("home",{nameofuser: req.user, notice: dataa});
