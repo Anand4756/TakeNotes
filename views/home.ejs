@@ -51,11 +51,15 @@ background: chocolate;
 </style>
 
 </head>
-<body style="background-color:rgba(180, 240, 194, 0.774);">
+<body style="background-color:rgba(186, 240, 194, 0.774);">
   <!--rgb(242, 243, 160)
    rgb(199, 224, 141)
   -->
-    
+  <% if(nameofuser!=undefined) { %>
+  <div style="display: flex; justify-content: center;">
+    <div style="width: 70%; font-size: 30px;background-color:rgb(82, 242, 122); ">PLS VERIFY YOUR ACCOUNT <button style="font-size: 20px; float: right;"><a href="/verified/sendemail" style="color: black;">Send mail</a></button></div>
+  </div>
+  <% } %>
     <div class="logo">
         <h1 class="logo">
            <span class="text-color" style="font-family: 'Playball', cursive;">TAKE NOTES</span> 
