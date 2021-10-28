@@ -133,6 +133,7 @@ const userSchema = new mongoose.Schema({
 
     
 app.get("/",async function(req, res){
+    try{
     await User.find({}.exec,function(err,data){
         Admin.find({},function(err, dataa){
             
@@ -142,6 +143,13 @@ app.get("/",async function(req, res){
         
     }).sort({_id: -1});
     }); 
+
+
+
+    }catch(e){
+        console.log("error", e);
+    }
+    
 });
          
 app.get("/register",function(req, res){
@@ -493,26 +501,74 @@ app.get("/verified/sendemail", (req, res) => {
     const token = new Alltoken({
         token: uniquetoken,
         email: req.user.username
-    }).save(function(err, success){
-        if(err){
-        console.log(err)
-    }else{
-        // res.render('home',{nameofuser:'',notice:''});
-        res.redirect('/');
-    }
     })
-    console.log(req.user._id+uniquetoken);
+    token.save();
+        
+        // res.render('home',{nameofuser:'',notice:''});
+        // res.redirect('/');
+        // res.send("mail sent..pls check your mail")
+        var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASS
+        }
+      });
+const url = "http://localhost:3000/verifyemail?token="+uniquetoken;
+      var mailOptions = {
+        from: process.env.USER,
+        to: req.user.username,
+        cc: 'anand.k4756@gmail.com',
+        subject: 'PLEASE VERIFY YOUR ACCOUNT checking nodemailer  ' + req.user.fullname,
+        html: 'Click on this link to verify your account' + '<a href="http://localhost:3000/verifyemail?token='+uniquetoken+'"> Verify</a>'
+
+
+              };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          res.send(error+ "try again")
+        } else {
+          console.log("sent");
+          res.send("mail sent..pls check your mail "+ req.user.username);
+        }
+      });
+    
+      
+
+    console.log(url);
    }
 })
 
 // app.get("/verified/sendmail/:id",(req, res)=>{
 //     var id= req.params.id;
 
-
 // })
 
 
+app.get("/verifyemail",async (req, res) => {
+const token = req.query.token;
+console.log("query"+req.query)
+console.log("check token here" + token);
 
+if(token){
+    var check = await Alltoken.findOne({token: token})
+
+if(check){
+    var userdata = await User.findOne({username: check.email})
+    userdata.isverified=true;
+    userdata.save();
+
+    res.redirect("/");
+}
+
+
+}else{
+    res.redirect("/");
+}
+
+})
 
 
 
