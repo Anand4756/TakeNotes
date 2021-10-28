@@ -4,12 +4,14 @@ const bodyparser = require("body-parser");
 const mongoose = require("mongoose");
 const ejs = require("ejs");
 const session = require('express-session');
+const nodemailer = require('nodemailer');
 const passportLocalMongoose = require("passport-local-mongoose");
 const passport = require("passport");
 var multer = require('multer');
 var path = require('path');
 const timezone = require('mongoose-timezone');
 const app = express();
+
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -48,7 +50,10 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String,
     fullname: String,
-    
+    isverified: {
+        type: Boolean,
+        default: false
+    }
     
     });
     
@@ -67,6 +72,26 @@ const userSchema = new mongoose.Schema({
         });
         
         // user.save();
+
+    const alltokenSchema = new mongoose.Schema({
+        token: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        expiresat: {
+            type: Date,
+            default: Date.now,
+            expires: 1000
+        }
+    })
+
+    const Alltoken = new mongoose.model("Alltoken", alltokenSchema);
+
+
     passport.use(User.createStrategy());
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
@@ -108,15 +133,23 @@ const userSchema = new mongoose.Schema({
 
     
 app.get("/",async function(req, res){
+    try{
     await User.find({}.exec,function(err,data){
         Admin.find({},function(err, dataa){
             
        res.render("home",{nameofuser: req.user, notice: dataa});
-        console.log(req.user);
+        console.log("here" + req.user);
     
         
     }).sort({_id: -1});
     }); 
+
+
+
+    }catch(e){
+        console.log("error", e);
+    }
+    
 });
          
 app.get("/register",function(req, res){
@@ -460,10 +493,82 @@ res.render("about-us");
 })
 
 
+app.get("/verified/sendemail", (req, res) => {
+    const uniquetoken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+   if(req.user.isverified){
+    res.redirect("/");
+   }else{
+    const token = new Alltoken({
+        token: uniquetoken,
+        email: req.user.username
+    })
+    token.save();
+        
+        // res.render('home',{nameofuser:'',notice:''});
+        // res.redirect('/');
+        // res.send("mail sent..pls check your mail")
+        var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASS
+        }
+      });
+const url = "http://localhost:3000/verifyemail?token="+uniquetoken;
+      var mailOptions = {
+        from: process.env.USER,
+        to: req.user.username,
+        cc: 'anand.k4756@gmail.com',
+        subject: 'PLEASE VERIFY YOUR ACCOUNT checking nodemailer  ' + req.user.fullname,
+        html: 'Click on this link to verify your account' + '<a href="http://localhost:3000/verifyemail?token='+uniquetoken+'"> Verify</a>'
 
 
+              };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          res.send(error+ "try again")
+        } else {
+          console.log("sent");
+          res.send("mail sent..pls check your mail "+ req.user.username);
+        }
+      });
+    
+      
+
+    console.log(url);
+   }
+})
+
+// app.get("/verified/sendmail/:id",(req, res)=>{
+//     var id= req.params.id;
+
+// })
 
 
+app.get("/verifyemail",async (req, res) => {
+const token = req.query.token;
+console.log("query"+req.query)
+console.log("check token here" + token);
+
+if(token){
+    var check = await Alltoken.findOne({token: token})
+
+if(check){
+    var userdata = await User.findOne({username: check.email})
+    userdata.isverified=true;
+    userdata.save();
+
+    res.redirect("/");
+}
+
+
+}else{
+    res.redirect("/");
+}
+
+})
 
 
 

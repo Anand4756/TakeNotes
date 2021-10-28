@@ -13,6 +13,7 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
 
+
 <link rel="stylesheet" href="css/style.css">
 <style>
   *{
@@ -51,11 +52,16 @@ background: chocolate;
 </style>
 
 </head>
-<body style="background-color:rgba(180, 240, 194, 0.774);">
+<body style="background-color:rgba(186, 240, 194, 0.774);">
   <!--rgb(242, 243, 160)
    rgb(199, 224, 141)
   -->
-    
+   <!-- && nameofuser.isverified='false' -->
+  <% if(nameofuser!=undefined && nameofuser.isverified==false) { %>
+  <div style="display: flex; justify-content: center;">
+    <div style="width: 70%; font-size: 30px;background-color:rgb(82, 242, 122); ">PLS VERIFY YOUR ACCOUNT <button style="font-size: 20px; float: right;"><a href="/verified/sendemail" style="color: black;">Send mail</a></button></div>
+  </div>
+  <% } %>
     <div class="logo">
         <h1 class="logo">
            <span class="text-color" style="font-family: 'Playball', cursive;">TAKE NOTES</span> 
@@ -73,8 +79,10 @@ background: chocolate;
                 <li><a href="">CONTACT US</a></li>
               </ul>
 
-                <% if (nameofuser) {%>
+                <% if (nameofuser && nameofuser.isverified==false) {%>
                   <li style="font-size: 20px; list-style: none;" ><a href="/logout"><span> <%= nameofuser.fullname %> </span></a></li>
+                  <% } else if(nameofuser && nameofuser.isverified==true) {%>
+                    <li style="font-size: 20px; list-style: none;" ><a href="/logout"><span> <%= nameofuser.fullname %></span><img src="https://img.icons8.com/external-kiranshastry-lineal-kiranshastry/24/ffffff/external-check-multimedia-kiranshastry-lineal-kiranshastry.png"/></a></li>
                   <% } else { %> 
                       <li style="font-size: 15px; list-style: none;"><a href="login">LOGIN/REGISTER</a></li>
                      <% } %>
