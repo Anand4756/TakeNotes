@@ -520,7 +520,7 @@ const url = "http://localhost:3000/verifyemail?token="+uniquetoken;
         to: req.user.username,
         cc: 'anand.k4756@gmail.com',
         subject: 'PLEASE VERIFY YOUR ACCOUNT checking nodemailer  ' + req.user.fullname,
-        html: 'Click on this link to verify your account' + '<a href="http://localhost:3000/verifyemail?token='+uniquetoken+'"> Verify</a>'
+        html: 'Click on this link to verify your account' + '<a href="http://noteshelper.herokuapp.com/verifyemail?token='+uniquetoken+'"> Verify</a>'
 
 
               };
