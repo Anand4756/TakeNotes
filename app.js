@@ -230,9 +230,8 @@ var storage = multer.diskStorage({
       }
     });
 
-    // const maxSize = 26214400;
-    const maxSize = 2097152;
-    var upload = multer({ storage: storage, limits: { fileSize: maxSize }}).single('file');
+
+    var upload = multer({ storage: storage }).single('file');
 
     app.post("/notes_upload",upload, function(req, res) {
         const sname = req.body.subjectname;
