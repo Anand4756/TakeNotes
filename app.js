@@ -160,7 +160,8 @@ app.get("/register",function(req, res){
         res.render("login");
         
         });
-    app.post("/register",function(req, res){
+
+    app.post("/register", async function(req, res){
   
         var fullnameofuser = req.body.fullname;
     User.register({fullname: req.body.fullname, username: req.body.username}, req.body.password, function(err, user){
@@ -169,7 +170,60 @@ app.get("/register",function(req, res){
             console.log(err);
         }else{
             passport.authenticate("local")(req, res, function(){
-                res.redirect("/");
+         res.render("account-verify",{sent: "mail sent to" + req.body.username});
+       const uniquetoken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    if(req.user.isverified){
+    res.redirect("/");
+   }else{
+    const token = new Alltoken({
+        token: uniquetoken,
+        email: req.body.username
+    })
+    token.save();
+        
+        // res.render('home',{nameofuser:'',notice:''});
+        // res.redirect('/');
+        // res.send("mail sent..pls check your mail")
+        var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.USER,
+          pass: process.env.PASS
+        }
+      });
+const url = "http://localhost:3000/verifyemail?token="+uniquetoken;
+      var mailOptions = {
+        from: process.env.USER,
+        to: req.body.username,
+        cc: 'anand.k4756@gmail.com',
+        subject: 'PLEASE VERIFY YOUR ACCOUNT ' + req.user.fullname,
+        html: 'Click on this link to verify your account ' + '<a href="http://noteshelper.herokuapp.com/verifyemail?token='+uniquetoken+'"> <h2>Verify<h2> </a>'
+
+
+              };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+          res.send(error+ "try again")
+        } else {
+          console.log("sent");
+          res.send("mail sent..pls check your mail "+ req.user.username);
+        }
+      });
+    
+      
+
+    console.log(url);
+   }
+
+
+
+
+
+
+
+
                 });
     }
     });
@@ -522,8 +576,8 @@ const url = "http://localhost:3000/verifyemail?token="+uniquetoken;
         from: process.env.USER,
         to: req.user.username,
         cc: 'anand.k4756@gmail.com',
-        subject: 'PLEASE VERIFY YOUR ACCOUNT checking nodemailer  ' + req.user.fullname,
-        html: 'Click on this link to verify your account' + '<a href="http://noteshelper.herokuapp.com/verifyemail?token='+uniquetoken+'"> Verify</a>'
+        subject: 'PLEASE VERIFY YOUR ACCOUNT  ' + req.user.fullname,
+        html: 'Click on this link to verify your account' + '<a href="http://noteshelper.herokuapp.com/verifyemail?token='+ uniquetoken+'"> <h1>Verify</h1></a>'
 
 
               };
