@@ -103,8 +103,11 @@ const userSchema = new mongoose.Schema({
         course: String,
         semester: String,
         notesfile: String,
-        
-        uploadedby: String
+        uploadedby: String,
+        isverified: {
+        type: Boolean,
+        default: false
+    }
     };
     
     const Note = mongoose.model("Note", noteSchema);
@@ -369,6 +372,8 @@ app.get("/notes", function(req, res){
 
 
 });
+//check this /notes route
+
 
 app.get("/course", function(req, res){
     Note.find({}.exec,function(err,data){
@@ -627,6 +632,19 @@ if(check){
 
 })
 
+app.get("/verified-notes/:id", async (req, res) => {
+var id = req.params.id;
+
+var foundnotes = await Note.findOne({_id: id});
+if(foundnotes){
+foundnotes.isverified=true;
+foundnotes.save();
+res.redirect("/admin-panel");
+}else{
+    console.log("some error")
+} 
+
+})
 
 
 const port = process.env.PORT || 3000

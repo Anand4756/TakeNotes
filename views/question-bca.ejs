@@ -75,7 +75,7 @@
       </div>
 
         <% notesdata.forEach(function(notess){ %>
-            <% if(notess.notestype!="notes" && notess.course=="bca") { %>
+            <% if(notess.notestype!="notes" && notess.course=="bca" && notess.isverified == true) { %>
               <div class="cse">
         
                 <table>

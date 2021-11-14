@@ -53,9 +53,14 @@
         <% if(notesdata.length>0) { %>
             <% notesdata.forEach(function(notess){ %>
             <div class="cse">
-              
-                    
-           <a href="/delete/<%=notess.id %>"  <i class="fas fa-trash-alt" style="float: right; margin-right: 30px; font-size: 30px;"></i></a>
+             
+
+           <a href="/delete/<%=notess.id %>"><img src="https://img.icons8.com/material-outlined/34/000000/trash--v1.png" style="float: right; margin-right: 30px; font-size: 30px;" /></a>
+           <%if(notess.isverified!= true) {%>  
+           <a href="/verified-notes/<%=notess.id%>"><img src="https://img.icons8.com/external-becris-lineal-becris/34/000000/external-check-mintab-for-ios-becris-lineal-becris-1.png" style="float: right; margin-right: 30px; font-size: 30px;" /></a> 
+            <% } %>
+             
+           <!-- <a href="/delete/<%=notess.id %>"  <i class="fas fa-trash-alt" style="float: right; margin-right: 30px; font-size: 30px;"></i></a> -->
                     <h2>SUBJECT: <span style="margin-left: 15px; color:maroon;"> <%= notess.notessubject %></h2> </span>
                     <h2>TOPIC: <span style="margin-left: 15px; color:maroon;">   <%= notess.notestopic %></h2></span>
                     <h2>TYPE: <span style="margin-left: 15px; color:maroon;">   <%= notess.notestype %></h2></span>
